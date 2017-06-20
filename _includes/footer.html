@@ -20,18 +20,26 @@
         </ul>
       </div>
 
-      <div class="footer-col footer-col-2">
+      <div class="footer-col footer-col-1">
         <ul class="social-media-list">
           {% if site.github_username %}
           <li>
             {% include icon-github.html username=site.github_username %}
           </li>
           {% endif %}
+
         </ul>
       </div>
 
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description | escape }}</p>
+      <div class="footer-col footer-col-2">
+        <!-- <p>{{ site.description | escape }}</p> -->
+        <ul class="social-media-list">
+          {% if site.linkedin %}
+          <li>
+            <a href="{{ site.linkedin }}">LinkedIn</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 
