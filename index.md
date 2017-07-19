@@ -4,7 +4,7 @@ title: About
 permalink: /index
 ---
 
-My name is Alexander Yang, and I'm currently a sophomore at MIT. This semester I will be taking:
+My name is Alexander Yang, and I'm currently a sophomore at MIT. At the moment, I'm interested in using recently developed NLP techniques to improve current methods of automatic music generation. This semester I will be taking:
 
 <ul>
   <li>6.867: Machine Learning</li>
@@ -14,7 +14,7 @@ My name is Alexander Yang, and I'm currently a sophomore at MIT. This semester I
   <li>18.404: Theory of Computation</li>
 </ul>
 
-I hope to document what I learn from these classes here. Please feel free to email me regarding any feedback or corrections.
+I hope to document what I learn from these classes <a href="https://medium.com/@alex_yang">here</a>. Please feel free to email me regarding any feedback or corrections.
 
 <!-- This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 

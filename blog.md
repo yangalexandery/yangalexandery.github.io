@@ -4,4 +4,4 @@ title: Blog
 permalink: /blog
 ---
 
-Work in progress (will be hosted on medium), please check back later.
+I sometimes post on <a href="https://medium.com/@alex_yang">Medium</a>, more posts will be added soon.
