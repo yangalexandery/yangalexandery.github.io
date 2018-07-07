@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "First Thoughts on Kaggle"
-date:   2017-07-12
-visible: true
+title:  "Relearning Variational Inference"
+date:   2018-07-07
+visible: false
 ---
-<a href="https://towardsdatascience.com/first-thoughts-on-kaggle-326a6c4dc005">https://towardsdatascience.com/first-thoughts-on-kaggle-326a6c4dc005</a>
+
+{% include mathjs %}
+
+$$2^3 * 4 = 32$$
 
 <!-- You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
