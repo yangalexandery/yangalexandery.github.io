@@ -14,16 +14,14 @@
               {{ site.title | escape }}
             {% endif %}
           </li> -->
-          {% if site.email %}
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-          {% endif %}
+          <li>{{ site.address }}</li>
         </ul>
       </div>
 
       <div class="footer-col footer-col-1">
-        <ul class="social-media-list">
+        <ul class="soc-media-list">
           {% if site.github_username %}
-          <li>
+          <li style="list-style-type: none;" >
             {% include icon-github.html username=site.github_username %}
           </li>
           {% endif %}
@@ -33,9 +31,9 @@
 
       <div class="footer-col footer-col-2">
         <!-- <p>{{ site.description | escape }}</p> -->
-        <ul class="social-media-list">
+        <ul class="soc-media-list">
           {% if site.linkedin %}
-          <li>
+          <li style="list-style-type: none;" >
             <a href="{{ site.linkedin }}">LinkedIn</a>
           </li>
           {% endif %}
