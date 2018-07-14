@@ -9,7 +9,7 @@ visible: true
 
 <a href="../07/relearning-variational-inference.html"> << Previous Post</a>
 
-<a href="../07/relearning-variational-inference.html">Previously</a>, I described the purpose and method of variational inference -- a means to learn a distribution's latent variables by finding a proxy distribution for the latent variables $$q(z \vert v)$$ and maximizing the Evidence Lower Bound (ELBO). Now, we'll discuss how we can maximize the ELBO, and then implement what we've learned.
+<a href="../07/relearning-variatio	nal-inference.html">Previously</a>, I described the purpose and method of variational inference -- a means to learn a distribution's latent variables by finding a proxy distribution for the latent variables $$q(z \vert v)$$ and maximizing the Evidence Lower Bound (ELBO). Now, we'll discuss how we can maximize the ELBO, and then implement what we've learned.
 
 ## Mean Field Variational Inference
 
@@ -60,7 +60,25 @@ p(z_k \vert z_{-k}, x) &\propto p(z, x) \\
 Assuming that the normalized distrbution of $$\exp(E_{q_{-k}}[\log p(z, x)])$$ is computable, we now have a means for computing the optimal distribution of $$q(z_k)$$ when the other variables $$z_{-k}$$ are fixed. How do we use this?
 
 ### Coordinate Ascent
-Work in progress.
+The *coordinate ascent* method allows us to converge to a local optimum. We iterate through each latent variable $$z_i$$, finding the optimum distribution when the other variables are fixed. An idea of how coordinate descent works on two parameters can be found here: 
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Coordinate_descent.svg/900px-Coordinate_descent.svg.png" style="width: 60%; display: block; margin: 0 auto;">
 
 ## Implementation
-An implementation of mean field variational inference on a Bayesian Mixture of Gaussians can be found <a href="https://gist.github.com/yangalexandery/717dcf682f0ab628f43d52f67434d44d">here</a>.
+Let's revisit the Bayesian Mixture of Gaussians from the previous post:
+1. Generate $$\mu_1, \mu_2$$ from $$\mathcal{N}(0, \tau^2)$$.
+2. Uniformly randomly select $$\pi_1$$ from the interval $$(0.25, 0.75)$$.
+2. For $$i = 1\ldots n$$:
+
+	a. Generate $$z_i$$ from $$\pi = \{p(z=1) = \pi_1, p(z=2) = 1 - \pi_1\}$$.
+
+	b. Generate $$x_i$$ from $$\mathcal{N}(\mu_{z_i}, \sigma^2)$$.
+
+Under mean field variational inference, we choose a family $$q(\mu_1, \mu_2, z_{1:n})$$ where the distribution of $$\mu_i$$ is a Gaussian with parameters $$\mathcal{N}(\widetilde{\mu_i}, \widetilde{\sigma_i}^2)$$ and the distribution of every $$z_i$$ contains only two probabilities, $$q(z_i = 1)$$ and $$q(z_i = 2)$$. Each variable $$\mu_1, \mu_2, z_{1:n}$$ is independent, and therefore $$q$$ factorizes and requirement for mean field variational inference holds. From our previous derivations in the Mean Field Variational Inference section, we can obtain the following update rules for the variables in $$q$$:
+<div style="align: center;">$$q^{\star}[z_i = k] \propto \exp (\log \pi_k + x_i * \widetilde{\mu_k} - (\widetilde{\mu_k}^2 + \widetilde{\sigma_k}^2) / 2)$$</div>
+<div style="align: center;">$$E[\mu_k] = \widetilde{\mu_k} = \frac{\sum^n_{i=1} q[z_i = k] x_i}{\sum^n_{i=1} q[z_i = k]} \\
+Var[\mu_k] = \widetilde{\sigma_k} = \frac{1}{\sum^n_{i=1} q[z_i=k]}$$</div>
+
+Please note that we skipped all of the steps required to compute these two rules, which can be found in Section 8 of <a href="https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf">this</a>. From here, it's a simple matter of having a reasonable initialization of the variational parameters in $$q$$, followed by alternating through the update rules for $$z_{1:n}, \mu_1, \mu_2$$ for coordinate ascent.
+
+An implementation of mean field variational inference on a Bayesian Mixture of Gaussians can be found <a href="https://gist.github.com/yangalexandery/717dcf682f0ab628f43d52f67434d44d">here</a>, which uses these two update rules.

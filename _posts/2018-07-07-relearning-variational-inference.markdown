@@ -7,6 +7,8 @@ visible: true
 
 {% include mathjs %}
 
+<a href="../08/implementing-variational-inference.html">Next Post >></a>
+
 The other day, I realized that there's a lot of content covered in MIT's machine learning classes (6.867, 9.520) that I still don't understand thoroughly, despite having taken these classes. So, this will be the first post in a hopefully long series where I take notes on materials I review.
 
 Please be aware that a lot of the content covered in this post is taken from <a href="https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf">here</a>.
