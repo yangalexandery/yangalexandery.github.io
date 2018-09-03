@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Relearning Markov Chain Monte Carlo"
+title:  "Relearning the Metropolis-Hastings Algorithm"
 date:   2018-08-31
-visible: false
+visible: true
 ---
 
 {% include mathjs %}
 
-In short, Markov Chain Monte Carlo (MCMC) is a family of methods for efficiently sampling from an arbitrary probability distribution. The Metropolis-Hastings algorithm is a specific example of MCMC, which we'll be summarizing in this post. First, however, let's justify the need of these sampling algorithms.
+Markov Chain Monte Carlo (MCMC) is a family of methods for efficiently sampling from an arbitrary probability distribution. The Metropolis-Hastings algorithm is a specific example of MCMC, which we'll be summarizing in this post. First, however, let's justify the need of these sampling algorithms.
 
 ## Sampling is hard, sometimes
 Informally, the problem of sampling a distribution is usually posed as:
@@ -31,6 +31,7 @@ Now consider the normal distribution $$x \sim \mathcal{N}(0, 1)$$, except with t
 The Metropolis-Hastings algorithm is able to sample an arbitrary probability distribution $$f$$ given access to two things:
 1. The previously mentioned $$[0, 1)$$ uniform distribution sampler
 2. A function $$g$$ proportional to the distribution $$f$$.
+
 Using the $$(0, 1]$$ sampler, we also need to supply the algorithm with a sampling method for some distribution $$h(x \vert y)$$, where $$h$$ is symmetric: $$h(x \vert y) = h(y \vert x)$$. One commonly used distribution (which we'll be using) is $$h(x \vert y) = \mathcal{N}(y, 1)$$. Now that we specified everything that we need, the Metropolis-Hasting algorithm, as taken from <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm#Intuition">Wikipedia</a>, works as follows:
 1. Pick some element $$x$$ to be a starting point.
 2. Sample a candidate $$x^{\prime}$$ from the distribution $$h(x^{\prime} \vert x)$$.
@@ -43,3 +44,8 @@ Using the $$(0, 1]$$ sampler, we also need to supply the algorithm with a sampli
 A few things are worth noting: the latest sample $$x^{\prime}$$ is always accepted when $$g(x^{\prime}) \ge g(x)$$ and $$\alpha \ge 1$$. As a result, the value $$x$$ tends to move towards higher-probability regions. In addition, the Metropolis-Hastings algorithm is often called a *random walk MCMC* due to how $$x$$ randomly changes in direction every iteration. Finally, the initial choice of starting point and choice of $$h$$ greatly affects how many iterations we need to closely approximate $$f$$. For example, in our previous distribution of $$x \sim \mathcal{N}(0, 1)$$ and $$x \ge 5$$, the combined choice of starting point $$x = 0$$ and distribution $$h(x \vert y) = \mathcal{N}(y, 1)$$ would require multiple iterations before the algorithm finally reaches a point where $$g(x)$$ is nonzero.
 
 There's another problem with Metropolis-Hastings: consider the distribution $$\mathcal{N}(0, 1)$$ with the additional condition $$\vert x \vert > 100$$. Without a sufficiently high-variance choice of distribution $$h$$, the algorithm will be forever stuck in one of the two disjoint areas of nonzero probabilities. As a result, it's pretty difficult for Metropolis-Hastings to accurately sample this entire distribution without manual modifications.
+
+### Implementation
+You can find my implementation of Metropolis-Hastings <a href="https://github.com/yangalexandery/blog-ws/blob/master/MCMC/metropolis-hastings.py">here</a>, using the previously mentioned normal distribution with $$x > 5$$ as an example. Sampling 100,000 times, we're able to obtain the resulting distrbution of samples:
+
+<img src="../../../images/mcmc_1.png">
