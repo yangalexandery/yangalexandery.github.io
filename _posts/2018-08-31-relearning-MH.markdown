@@ -46,6 +46,6 @@ A few things are worth noting: the latest sample $$x^{\prime}$$ is always accept
 There's another problem with Metropolis-Hastings: consider the distribution $$\mathcal{N}(0, 1)$$ with the additional condition $$\vert x \vert > 100$$. Without a sufficiently high-variance choice of distribution $$h$$, the algorithm will be forever stuck in one of the two disjoint areas of nonzero probabilities. As a result, it's pretty difficult for Metropolis-Hastings to accurately sample this entire distribution without manual modifications.
 
 ### Implementation
-You can find my implementation of Metropolis-Hastings <a href="https://github.com/yangalexandery/blog-ws/blob/master/MCMC/metropolis-hastings.py">here</a>, using the previously mentioned normal distribution with $$x > 5$$ as an example. Sampling 100,000 times, we're able to obtain the resulting distrbution of samples:
+You can find my implementation of Metropolis-Hastings <a href="https://github.com/yangalexandery/blog-ws/blob/master/MCMC/metropolis-hastings.py">here</a>, using the previously mentioned normal distribution with $$x > 5$$ as an example. Iterating 100,000 times, we're able to obtain the resulting distrbution of samples:
 
 <img src="../../../images/mcmc_1.png">
