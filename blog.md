@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Blog
-permalink: /blog
+title: Workbook
+permalink: /workbook
 ---
 
-More coming soon, hopefully.
+Every so often, I write-up things I learn and post them here. This can be considered a 'blog' of sorts, but I prefer the term 'workbook' since this is done more for my own understanding than for the reader's.
 
 {% for post in site.posts %}
   {% if post.visible %}
