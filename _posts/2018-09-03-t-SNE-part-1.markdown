@@ -63,7 +63,11 @@ Perplexity determines our choice of $$\sigma_i$$ by making us select $$Perp = 2^
 
 ## Miscellaneous
 Hinton and Roweis initialize the algorithm by randomly sampling $$y_i$$ from an isotropic Gaussian distribution. Also, momentum is used in the gradient descent algorithm for better performance. From the original paper:
-<div style="align: center;">$$\mathcal{Y}^{(t)} = \mathcal{Y}^{(t-1)} + \eta\displaystyle\frac{\partial C}{\partial \mathcal{Y}} + \alpha (t) (\mathcal{Y}^{(t - 1)} - \mathcal{Y}^{(t-2)}).$$</div>
+<div style="align: center;">$$\mathcal{Y}^{(t)} = \mathcal{Y}^{(t-1)} - \eta\displaystyle\frac{\partial C}{\partial \mathcal{Y}} + \alpha (t) (\mathcal{Y}^{(t - 1)} - \mathcal{Y}^{(t-2)}).$$</div>
 
 ## Implementation on MNIST
-Coming soon.
+My implementation of SNE can be found <a href="https://github.com/yangalexandery/blog-ws/blob/master/t-SNE/sne.py">here</a>. To test my implementation, I ran it on the MNIST dataset (600 points, perplexity 20, 1000 iters). We get some pretty colorful graphs (these are for two separate runs of SNE):
+<img src="../../../images/sne_1.png">
+<img src="../../../images/sne_2.png">
+
+It seems that SNE is somewhat effective at grouping images with the same labels together. In addition, classes which look similar are close together: the '4' cluster is close to the '9' cluster in both runs, as is the '3' cluster and '8' cluster. On the other hand, classes such as '2' and '4' which are very not-alike seem to be far apart.
