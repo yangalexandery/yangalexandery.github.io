@@ -4,7 +4,7 @@ title: Workbook
 permalink: /workbook
 ---
 
-Every so often, I write-up things I learn and post them here. This can be considered a 'blog' of sorts, but I prefer the term 'workbook' since this is done more for my own understanding than for the reader's.
+In the summer of 2018, I decided to write up a few things I learned to further my understanding of them, which you can view here.
 
 {% for post in site.posts %}
   {% if post.visible %}
